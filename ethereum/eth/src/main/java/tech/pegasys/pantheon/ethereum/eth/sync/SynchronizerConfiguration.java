@@ -227,7 +227,7 @@ public class SynchronizerConfiguration {
     private int downloaderChainSegmentSize = 20;
     private long trailingPeerBlocksBehindThreshold;
     private int maxTrailingPeers = Integer.MAX_VALUE;
-    private int downloaderParallelism = 2;
+    private int downloaderParallelism = Runtime.getRuntime().availableProcessors();
 
     public Builder fastSyncPivotDistance(final int distance) {
       fastSyncPivotDistance = distance;
@@ -294,7 +294,7 @@ public class SynchronizerConfiguration {
       return this;
     }
 
-    public Builder downloaderParallelisim(final int downloaderParallelism) {
+    public Builder downloaderParallelism(final int downloaderParallelism) {
       this.downloaderParallelism = downloaderParallelism;
       return this;
     }

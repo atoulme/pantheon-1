@@ -199,6 +199,14 @@ public class PantheonCommand implements Runnable {
   )
   private final Integer maxTrailingPeers = Integer.MAX_VALUE;
 
+  @Option(
+    names = {"--downloader-parallelism"},
+    paramLabel = MANDATORY_INTEGER_FORMAT_HELP,
+    description =
+        "Number of threads to use to download blocks (default: the number of processors available to the Java virtual machine)"
+  )
+  private final Integer downloaderParallelism = Runtime.getRuntime().availableProcessors();
+
   // TODO: Re-enable as per NC-1057/NC-1681
   //  @Option(
   //    names = {"--sync-mode"},
@@ -464,6 +472,7 @@ public class PantheonCommand implements Runnable {
     checkNotNull(syncMode);
     synchronizerConfigurationBuilder.syncMode(syncMode);
     synchronizerConfigurationBuilder.maxTrailingPeers(maxTrailingPeers);
+    synchronizerConfigurationBuilder.downloaderParallelism(downloaderParallelism);
     return synchronizerConfigurationBuilder.build();
   }
 
